@@ -3,6 +3,7 @@ package ca.bcit.foodtruckproject;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -69,15 +70,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        // Where we get the values that are passed
+        Intent intent = getIntent();
+        final double[] passedCoords = intent.getDoubleArrayExtra("coordinates");
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 mMap.clear();
-                LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
+                LatLng userLocation = new LatLng(passedCoords[1], passedCoords[0]);
+                mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Food Truck"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,17.0f));
             }
 
             @Override
