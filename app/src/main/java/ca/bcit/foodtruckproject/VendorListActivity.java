@@ -51,7 +51,7 @@ public class VendorListActivity extends AppCompatActivity {
 
         int idx = 0;
         for (int i = 0; i < vendors.size(); i++) {
-            if (vendors.get(i).equals(key)) {
+            if (vendors.get(i).getName().equals(key)) {
                 idx = i;
                 break;
             }
