@@ -28,8 +28,7 @@ public class VendorListActivity extends AppCompatActivity {
 
     private static String SERVICE_URL =
             "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=food-vendors&facet=vendor_type&facet=status&facet=geo_localarea";
-    private ArrayList<String> businessNames;
-    private ArrayList<String> vendorTypes;
+    private ArrayList<Vendor> vendors;
     private ArrayList<double[]> coordinates;
     ListView lv;
 
@@ -39,8 +38,7 @@ public class VendorListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vendor_list);
 
         lv = findViewById(R.id.list);
-        businessNames = new ArrayList<>();
-        vendorTypes = new ArrayList<>();
+        vendors = new ArrayList<>();
         coordinates = new ArrayList<>();
 
         new GetVendors().execute();
@@ -52,8 +50,8 @@ public class VendorListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MapsActivity.class);
 
         int idx = 0;
-        for (int i = 0; i < businessNames.size(); i++) {
-            if (businessNames.get(i).equals(key)) {
+        for (int i = 0; i < vendors.size(); i++) {
+            if (vendors.get(i).equals(key)) {
                 idx = i;
                 break;
             }
@@ -90,16 +88,19 @@ public class VendorListActivity extends AppCompatActivity {
                 JSONArray jsonCoords = vendorGeom.getJSONArray("coordinates");
                 double[] vendorCoords = new double[]{jsonCoords.getDouble(0), jsonCoords.getDouble(1)};
                 //not all records have business names; using food type instead if they don't.
+                //changed description to 'No Name' in order to create a vendor object
                 try {
                     businessName = vendorFields.getString("business_name");
                 } catch (JSONException e) {
-                    businessName = vendorFields.getString("description");
+                    businessName = "No Name";
                 }
+                // Vendor(String name, String description, String type, String locationDescription, String timeStamp)
+                String description = vendorFields.getString("description");
                 String vendorType = vendorFields.getString("vendor_type");
-                //adds string into ArrayList of Business Names
-                businessNames.add(businessName);
-                //adds string into ArrayList of Vendor Types
-                vendorTypes.add(vendorType);
+                String locationDescription = vendorFields.getString("location");
+                String timeStamp = record.getString("record_timestamp");
+                Vendor vendor = new Vendor(businessName, description, vendorType, locationDescription, timeStamp);
+                vendors.add(vendor);
                 coordinates.add(vendorCoords);
             }
 
@@ -112,7 +113,7 @@ public class VendorListActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void o) {
             super.onPostExecute(o);
-            Adapter adapter = new Adapter(VendorListActivity.this, businessNames);
+            Adapter adapter = new Adapter(VendorListActivity.this, vendors);
             lv.setAdapter(adapter);
         }
     }

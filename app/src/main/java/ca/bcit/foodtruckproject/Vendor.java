@@ -6,6 +6,8 @@ public class Vendor {
     String type;
     String locationDescription;
     String timeStamp;
+    Double longCoord;
+    Double latCoord;
 
     public Vendor() {}
 
@@ -37,6 +39,14 @@ public class Vendor {
         return this.timeStamp;
     }
 
+    public Double getLongCoord() {
+        return this.longCoord;
+    }
+
+    public Double getLatCoord() {
+        return this.latCoord;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -56,6 +66,7 @@ public class Vendor {
     public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
+
 
 
 }
