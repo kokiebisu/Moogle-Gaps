@@ -1,5 +1,7 @@
 package ca.bcit.foodtruckproject;
 
+import ca.bcit.foodtruckproject.Vendor;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -27,7 +29,7 @@ import ca.bcit.foodtruckproject.R;
 public class VendorListActivity extends AppCompatActivity {
 
     private static String SERVICE_URL =
-            "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=food-vendors&facet=vendor_type&facet=status&facet=geo_localarea";
+            "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=food-vendors&rows=91&facet=vendor_type&facet=status&facet=geo_localarea";
     private ArrayList<Vendor> vendors;
     private ArrayList<double[]> coordinates;
     ListView lv;
@@ -58,6 +60,9 @@ public class VendorListActivity extends AppCompatActivity {
         }
 
         intent.putExtra("coordinates", coordinates.get(idx));
+        intent.putExtra("vendorName", vendors.get(idx).getName());
+        intent.putExtra("vendorDescription", vendors.get(idx).getDescription());
+
 
         startActivity(intent);
     }
@@ -87,18 +92,21 @@ public class VendorListActivity extends AppCompatActivity {
                 JSONObject vendorGeom = vendorFields.getJSONObject("geom");
                 JSONArray jsonCoords = vendorGeom.getJSONArray("coordinates");
                 double[] vendorCoords = new double[]{jsonCoords.getDouble(0), jsonCoords.getDouble(1)};
-                //not all records have business names; using food type instead if they don't.
-                //changed description to 'No Name' in order to create a vendor object
-                try {
-                    businessName = vendorFields.getString("business_name");
-                } catch (JSONException e) {
-                    businessName = "No Name";
-                }
                 // Vendor(String name, String description, String type, String locationDescription, String timeStamp)
                 String description = vendorFields.getString("description");
                 String vendorType = vendorFields.getString("vendor_type");
                 String locationDescription = vendorFields.getString("location");
                 String timeStamp = record.getString("record_timestamp");
+                //not all records have business names; using food type instead if they don't.
+                //changed description to 'No Name' in order to create a vendor object
+                /*
+                Changed 'No Name' to be the description.
+                 */
+                try {
+                    businessName = vendorFields.getString("business_name");
+                } catch (JSONException e) {
+                    businessName = description;
+                }
                 Vendor vendor = new Vendor(businessName, description, vendorType, locationDescription, timeStamp);
                 vendors.add(vendor);
                 coordinates.add(vendorCoords);

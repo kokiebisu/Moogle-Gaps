@@ -16,13 +16,15 @@
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text=""
         android:textSize="18sp"
         android:visibility="visible"
-        android:onClick="clickItem"/>
+        android:onClick="clickItem"
+        android:background="@color/colorPrimary"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/description"
