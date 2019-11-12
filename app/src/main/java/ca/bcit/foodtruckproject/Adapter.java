@@ -42,7 +42,8 @@ public class Adapter extends ArrayAdapter<Vendor> {
         tvLocationDescription.setText(vendor.getLocationDescription());
         tvTimeStamp.setText(vendor.getTimeStamp());
 
-
+        String descriptionString = "Food type: " + tvDescription.getText().toString();
+        tvDescription.setText(descriptionString);
         return convertView;
     }
 }
