@@ -11,20 +11,22 @@
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="-91dp" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        />
+<!--        tools:layout_editor_absoluteX="-91dp"-->
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text=""
         android:textSize="18sp"
         android:visibility="visible"
         android:onClick="clickItem"
         android:background="@color/colorPrimary"
+        android:textColor="@color/colorAccentText"
         android:gravity="center"/>
 
     <TextView
@@ -66,5 +68,4 @@
         android:textSize="18sp"
         android:visibility="visible"
         android:onClick="clickItem"/>
-
 </LinearLayout>
