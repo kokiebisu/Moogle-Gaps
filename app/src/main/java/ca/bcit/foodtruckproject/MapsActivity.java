@@ -119,13 +119,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final double[] passedCoords = intent.getDoubleArrayExtra("coordinates");
         mDestination = new LatLng(passedCoords[1], passedCoords[0]);
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
+              mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDestination,17));
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 mMap.addMarker(new MarkerOptions().position(mDestination).title("Your Food Truck"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(mDestination));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDestination,17));
+//                mMap.moveCamera(CameraUpdateFactory.newLatLng(mDestination));
+//                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDestination,17));
             }
 
             @Override
