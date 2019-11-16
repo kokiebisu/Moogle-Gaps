@@ -117,15 +117,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Where we get the values that are passed
         Intent intent = getIntent();
         final double[] passedCoords = intent.getDoubleArrayExtra("coordinates");
+    final String vendorName = intent.getStringExtra("vendorName");
         mDestination = new LatLng(passedCoords[1], passedCoords[0]);
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
               mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDestination,17));
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                mMap.addMarker(new MarkerOptions().position(mDestination).title("Your Food Truck"));
-//                mMap.moveCamera(CameraUpdateFactory.newLatLng(mDestination));
-//                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDestination,17));
+                mMap.addMarker(new MarkerOptions().position(mDestination).title(vendorName));
             }
 
             @Override
@@ -166,7 +165,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.clear();
                 LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
-//                mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
             }
         }
 
@@ -195,7 +193,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onLocationChanged(Location location) {
                 mOrigin = new LatLng(location.getLatitude(), location.getLongitude());
-//                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mOrigin,12));
                 if(mOrigin != null && mDestination != null)
                     drawRoute();
             }
