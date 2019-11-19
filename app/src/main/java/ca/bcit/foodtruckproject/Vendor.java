@@ -1,6 +1,8 @@
 package ca.bcit.foodtruckproject;
 
-public class Vendor {
+import java.io.Serializable;
+
+public class Vendor implements Serializable {
     String name;
     String description;
     String type;
@@ -11,12 +13,15 @@ public class Vendor {
 
     public Vendor() {}
 
-    public Vendor(String name, String description, String type, String locationDescription, String timeStamp) {
+    public Vendor(String name, String description, String type, String locationDescription,
+                  String timeStamp, Double longCoord, Double latCoord) {
         this.name = name;
         this.description = description;
         this.type = type;
         this.locationDescription = locationDescription;
         this.timeStamp = timeStamp;
+        this.latCoord = latCoord;
+        this.longCoord = longCoord;
     }
 
     public String getName() {

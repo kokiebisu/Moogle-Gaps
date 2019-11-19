@@ -71,7 +71,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Where we get the values that are passed
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         final double[] passedCoords = intent.getDoubleArrayExtra("coordinates");
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -79,8 +79,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onLocationChanged(Location location) {
                 mMap.clear();
-                LatLng userLocation = new LatLng(passedCoords[1], passedCoords[0]);
-                mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Food Truck"));
+                LatLng userLocation = new LatLng(passedCoords[0], passedCoords[1]);
+                mMap.addMarker(new MarkerOptions().position(userLocation).title(intent.getStringExtra("vendorName")));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,17.0f));
             }

@@ -59,7 +59,8 @@ public class VendorListActivity extends AppCompatActivity {
             }
         }
 
-        intent.putExtra("coordinates", coordinates.get(idx));
+        double[] coords = {vendors.get(idx).getLatCoord(), vendors.get(idx).getLongCoord()};
+        intent.putExtra("coordinates", coords);
         intent.putExtra("vendorName", vendors.get(idx).getName());
         intent.putExtra("vendorDescription", vendors.get(idx).getDescription());
 
@@ -107,7 +108,8 @@ public class VendorListActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     businessName = description;
                 }
-                Vendor vendor = new Vendor(businessName, description, vendorType, locationDescription, timeStamp);
+                Vendor vendor = new Vendor(businessName, description, vendorType, locationDescription,
+                        timeStamp, vendorCoords[0], vendorCoords[1]);
                 vendors.add(vendor);
                 coordinates.add(vendorCoords);
             }
