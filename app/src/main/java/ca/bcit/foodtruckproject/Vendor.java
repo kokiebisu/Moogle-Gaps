@@ -11,10 +11,12 @@ public class Vendor implements Serializable {
     Double longCoord;
     Double latCoord;
 
+    int id;
+
     public Vendor() {}
 
     public Vendor(String name, String description, String type, String locationDescription,
-                  String timeStamp, Double longCoord, Double latCoord) {
+                  String timeStamp, Double longCoord, Double latCoord, int id) {
         this.name = name;
         this.description = description;
         this.type = type;
@@ -22,6 +24,15 @@ public class Vendor implements Serializable {
         this.timeStamp = timeStamp;
         this.latCoord = latCoord;
         this.longCoord = longCoord;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

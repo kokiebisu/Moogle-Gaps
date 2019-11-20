@@ -10,62 +10,10 @@
 
     <ListView
         android:id="@+id/list"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        />
-<!--        tools:layout_editor_absoluteX="-91dp"-->
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text=""
-        android:textSize="18sp"
-        android:visibility="visible"
-        android:onClick="clickItem"
         android:background="@color/colorPrimary"
-        android:textColor="@color/colorAccentText"
-        android:gravity="center"/>
+        android:dividerHeight="5dp"
+        android:divider="@color/colorPrimary"/>
 
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text=""
-        android:textSize="18sp"
-        android:visibility="visible"
-        android:onClick="clickItem"/>
-
-    <TextView
-        android:id="@+id/type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text=""
-        android:textSize="18sp"
-        android:visibility="visible"
-        android:onClick="clickItem"/>
-
-    <TextView
-        android:id="@+id/locationDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text=""
-        android:textSize="18sp"
-        android:visibility="visible"
-        android:onClick="clickItem"/>
-
-    <TextView
-        android:id="@+id/timeStamp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text=""
-        android:textSize="18sp"
-        android:visibility="visible"
-        android:onClick="clickItem"/>
 </LinearLayout>

@@ -28,19 +28,17 @@ public class Adapter extends ArrayAdapter<Vendor> {
         Vendor vendor = getItem(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_vendor_list, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
         }
 
         TextView tvName = convertView.findViewById(R.id.name);
         TextView tvDescription = convertView.findViewById(R.id.description);
-        TextView tvType = convertView.findViewById(R.id.timeStamp);
         TextView tvLocationDescription = convertView.findViewById(R.id.locationDescription);
-        TextView tvTimeStamp = convertView.findViewById(R.id.timeStamp);
+        TextView id = convertView.findViewById(R.id.vendorID);
+        id.setText("" + vendor.getId());
         tvName.setText(vendor.getName());
         tvDescription.setText(vendor.getDescription());
-        tvType.setText(vendor.getType());
         tvLocationDescription.setText(vendor.getLocationDescription());
-        tvTimeStamp.setText(vendor.getTimeStamp());
 
         String descriptionString = "Food type: " + tvDescription.getText().toString();
         tvDescription.setText(descriptionString);

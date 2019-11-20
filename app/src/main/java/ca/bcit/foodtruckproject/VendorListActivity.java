@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.JsonReader;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -47,22 +48,16 @@ public class VendorListActivity extends AppCompatActivity {
     }
 
     public void clickItem(View view) {
-        TextView tv = (TextView) view;
-        String key = tv.getText().toString();
+        LinearLayout ll = (LinearLayout) view;
+        TextView tv = (TextView) ll.getChildAt(3);
+        int key = Integer.parseInt(tv.getText().toString());
         Intent intent = new Intent(this, MapsActivity.class);
 
-        int idx = 0;
-        for (int i = 0; i < vendors.size(); i++) {
-            if (vendors.get(i).getName().equals(key)) {
-                idx = i;
-                break;
-            }
-        }
 
-        double[] coords = {vendors.get(idx).getLatCoord(), vendors.get(idx).getLongCoord()};
+        double[] coords = {vendors.get(key).getLatCoord(), vendors.get(key).getLongCoord()};
         intent.putExtra("coordinates", coords);
-        intent.putExtra("vendorName", vendors.get(idx).getName());
-        intent.putExtra("vendorDescription", vendors.get(idx).getDescription());
+        intent.putExtra("vendorName", vendors.get(key).getName());
+        intent.putExtra("vendorDescription", vendors.get(key).getDescription());
 
 
         startActivity(intent);
@@ -109,7 +104,7 @@ public class VendorListActivity extends AppCompatActivity {
                     businessName = description;
                 }
                 Vendor vendor = new Vendor(businessName, description, vendorType, locationDescription,
-                        timeStamp, vendorCoords[0], vendorCoords[1]);
+                        timeStamp, vendorCoords[0], vendorCoords[1], i);
                 vendors.add(vendor);
                 coordinates.add(vendorCoords);
             }
